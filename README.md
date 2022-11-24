@@ -40,7 +40,7 @@ python manage.py createsuperuser
 python manage.py runserver localhost:8000
 ```
 
-You can now access the api through http://localhost:8000
+You can now access the api through http://localhost:8000/
 
 ## Docs
 
