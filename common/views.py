@@ -19,7 +19,7 @@ def download_daily_report(request):
     """
     date = request.data['date']
     logs = ActionLogger.objects.filter(action_time__date=date).values('change_message')
-    if not logs:
+    if not logs.exists():
         Response(status=status.HTTP_204_NO_CONTENT)
 
     df = pd.DataFrame(logs)

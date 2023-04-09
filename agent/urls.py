@@ -1,6 +1,6 @@
 from django.urls import path
 
-from agent.model_views.agent_views import ParticipantListAPIView, invite_participant, UserQuizzes, MyQuizzes, notify
+from agent.views.agent_views import ParticipantListAPIView, invite_participant, UserQuizzes, MyQuizzes, notify
 
 urlpatterns = [
     path('participants/', ParticipantListAPIView.as_view(), name='participants'),

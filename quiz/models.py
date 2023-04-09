@@ -20,7 +20,7 @@ class UpdateCreateDate(models.Model):
 
 class Quiz(UpdateCreateDate):
     title = models.CharField(max_length=50, verbose_name='Quiz title')
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='quizzes')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quizzes')
 
     def __str__(self):
         return self.title

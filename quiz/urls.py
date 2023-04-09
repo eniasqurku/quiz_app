@@ -1,9 +1,9 @@
 from django.urls import path
 
-from quiz.model_views.answer_views import AnswerListCreateAPIView, AnswerRetrieveUpdateDestroyView
-from quiz.model_views.question_views import QuestionListCreateAPIView, QuestionRetrieveUpdateDestroyView
-from quiz.model_views.quiz_views import QuizListCreateAPIView, QuizRetrieveUpdateDestroyView
-from quiz.model_views.taken_quiz_views import Participate
+from quiz.views.answer_views import AnswerListCreateAPIView, AnswerRetrieveUpdateDestroyView
+from quiz.views.question_views import QuestionListCreateAPIView, QuestionRetrieveUpdateDestroyView
+from quiz.views.quiz_views import QuizListCreateAPIView, QuizRetrieveUpdateDestroyView
+from quiz.views.taken_quiz_views import Participate
 
 urlpatterns = [
     path('quizzes/', QuizListCreateAPIView.as_view(), name='quizzes'),

@@ -13,14 +13,14 @@ class QuizReadSerializer(serializers.ModelSerializer):
 
 
 class QuizWriteSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True)
+    questions = QuestionSerializer(many=True, required=False)
 
     class Meta:
         model = Quiz
         fields = ['id', 'title', 'questions']
 
     def create(self, validated_data):
-        questions = validated_data.pop('questions')
+        questions = validated_data.pop('questions', [])
         validated_data['owner'] = self.context['request'].user
         quiz = super(QuizWriteSerializer, self).create(validated_data)
         for question_data in questions:

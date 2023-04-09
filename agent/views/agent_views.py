@@ -77,11 +77,10 @@ def notify(request, pk):
     if quiz not in user.quizzes.all():
         return Response({ERRORS: "You don't have permission to notify about other quizzes"},
                         status=status.HTTP_403_FORBIDDEN)
-    taken_quizzes = TakenQuiz.objects.filter(participant=participant, quiz=quiz)
-    data = tuple()
-    for taken_quiz in taken_quizzes:
+    taken_quiz = TakenQuiz.objects.filter(participant=participant, quiz=quiz).first()
+    if taken_quiz:
         data = (taken_quiz.quiz.title, taken_quiz.score())
+        send_score_email(participant.email, data)
+        return Response({MESSAGE: 'Successful'}, status=status.HTTP_204_NO_CONTENT)
 
-    send_score_email(participant.email, data)
-
-    return Response({MESSAGE: 'Successful'}, status=status.HTTP_204_NO_CONTENT)
+    return Response({MESSAGE: 'User has not taken the specified quiz'}, status=status.HTTP_400_BAD_REQUEST)
