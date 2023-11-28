@@ -72,6 +72,7 @@ class ParticipantAnswer(models.Model):
         verbose_name = "Answer"
         verbose_name_plural = "Answers"
         unique_together = ("participant", "question")
+        ordering = ["id"]
 
     def is_correct(self) -> bool:
         return self.answer.correct

@@ -6,13 +6,6 @@ from rest_framework.test import APIClient
 from agent.cons import CREATOR_GROUP_NAME, PARTICIPANT_GROUP_NAME
 from agent.models import User
 from authentication.serializers import MyTokenObtainPairSerializer
-from django.core.management import call_command
-
-
-@pytest.fixture(scope="session")
-def django_db_setup(django_db_setup, django_db_blocker):
-    with django_db_blocker.unblock():
-        call_command("loaddata", "groups.yaml")
 
 
 @pytest.fixture
