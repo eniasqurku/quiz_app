@@ -8,34 +8,77 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
+        ("contenttypes", "0002_remove_content_type_name"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ActionLogger',
+            name="ActionLogger",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('action_time', models.DateTimeField(default=django.utils.timezone.now, editable=False, verbose_name='Action time')),
-                ('object_id', models.TextField(blank=True, null=True, verbose_name='Object id')),
-                ('object_repr', models.CharField(max_length=200, verbose_name='Object repr')),
-                ('action_flag', models.PositiveSmallIntegerField(verbose_name='Action flag')),
-                ('change_message', models.TextField(blank=True, verbose_name='Change message')),
-                ('content_type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='contenttypes.contenttype', verbose_name='Content Type')),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='User')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "action_time",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="Action time",
+                    ),
+                ),
+                (
+                    "object_id",
+                    models.TextField(blank=True, null=True, verbose_name="Object id"),
+                ),
+                (
+                    "object_repr",
+                    models.CharField(max_length=200, verbose_name="Object repr"),
+                ),
+                (
+                    "action_flag",
+                    models.PositiveSmallIntegerField(verbose_name="Action flag"),
+                ),
+                (
+                    "change_message",
+                    models.TextField(blank=True, verbose_name="Change message"),
+                ),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="contenttypes.contenttype",
+                        verbose_name="Content Type",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Action Logger',
-                'verbose_name_plural': 'Action Loggers',
-                'db_table': 'action_logger',
+                "verbose_name": "Action Logger",
+                "verbose_name_plural": "Action Loggers",
+                "db_table": "action_logger",
             },
             managers=[
-                ('objects', common.models.LogEntryManager()),
+                ("objects", common.models.LogEntryManager()),
             ],
         ),
     ]

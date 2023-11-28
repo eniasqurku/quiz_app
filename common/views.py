@@ -7,8 +7,10 @@ from rest_framework.response import Response
 from common.models import ActionLogger
 import pandas as pd
 
+from quiz_app.cons import ERRORS
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 @permission_classes([IsAdminUser])
 def download_daily_report(request):
     """
@@ -17,15 +19,22 @@ def download_daily_report(request):
     Body Parameter:
         date: str
     """
-    date = request.data['date']
-    logs = ActionLogger.objects.filter(action_time__date=date).values('change_message')
+    date = request.data.get("date")
+    if not date:
+        return Response(
+            {ERRORS: "Please supply 'date' parameter in the body"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    logs = ActionLogger.objects.filter(action_time__date=date).values("change_message")
     if not logs.exists():
         Response(status=status.HTTP_204_NO_CONTENT)
 
     df = pd.DataFrame(logs)
-    data = df['change_message'].value_counts()
-    data = data.to_frame(name='Usage Nr')
-    response = HttpResponse(content=data.to_csv(index_label='Type'), content_type="text/csv")
+    data = df["change_message"].value_counts()
+    data = data.to_frame(name="Usage Nr")
+    response = HttpResponse(
+        content=data.to_csv(index_label="Type"), content_type="text/csv"
+    )
     response["Content-Disposition"] = f"attachment; filename=daily_usage_{date}.csv"
 
     return response

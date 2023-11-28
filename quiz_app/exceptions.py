@@ -1,16 +1,7 @@
 from rest_framework.exceptions import APIException
 
 
-class InvalidForm(BaseException):
-    def __init__(self, form):
-        self.form = form
-
-    def to_json(self):
-        return self.form.errors.as_json()
-
-
-class InvalidData(BaseException):
-
+class InvalidData(Exception):
     def __init__(self, message):
         self.message = message
 

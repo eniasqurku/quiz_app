@@ -7,20 +7,20 @@ from agent.models import User
 
 class EmailUserAdmin(UserAdmin):
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
-         ),
+        (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),
     )
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('last_login',)}),
-        (_('Groups'), {'fields': ('groups',)}),
+        (None, {"fields": ("email", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name")}),
+        (
+            _("Permissions"),
+            {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions")},
+        ),
+        (_("Important dates"), {"fields": ("last_login",)}),
+        (_("Groups"), {"fields": ("groups",)}),
     )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
-    ordering = ('email',)
+    list_display = ("email", "first_name", "last_name", "is_staff")
+    ordering = ("email",)
     search_fields = ("first_name", "last_name", "email")
 
 
